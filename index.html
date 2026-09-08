@@ -27,27 +27,29 @@
     </header>
 
     <div id="archP" class="page-view active fade-in">
-        <div class="hero"><h1>Our Memory Archive</h1><p>helping you rediscover the little things in life. <br> <br> <br> <br> a cozy archive on the internet where users around the world share their favorite memories. <br> a hopeful space to bridge the global community. <br> <br>  <br> <br> how it works: seal your favorite memory up in a letter. once you're done, why not dive into someone else's? <br> <br>  </p></div>
+        <div class="hero"><h1>Our Memory Archive</h1><p>helping you rediscover the little things in life. <br> <br> <br> <br> a cozy archive on the internet where users around the world share their favorite memories. we're bridging the global community, one step at a time, through hope. <br> <br>  <br> <br> how it works: seal your favorite memory up in a letter. once you're done, why not dive into someone else's? <br> <br> disclaimer: this is a beta version </p></div>
         <div style="position:relative;max-width:1000px;margin:0 auto;"><div class="line" style="top:110px"></div><div class="line" style="top:370px"></div><div class="line" style="top:630px"></div><div class="grid" id="grid"></div></div>
         <button class="share-btn" onclick="openW()">share your favorite memory ✉️</button>
     </div>
 
-    <div id="teamP" class="page-view">
-        <div class="team-container">
-            <img class="p-img" src="your-photo.jpg" alt="placeholder">
-            <h2 style="color:var(--link);margin-bottom:4px;">Angie Au</h2>
-            <div style="color:var(--btn);font-weight:600;font-size:0.9rem;text-transform:uppercase;margin-bottom:20px;">Founder and Creator</div>
-            <p style="line-height:1.6;margin-bottom:25px;">Welcome to Our Memory Archive! I'm an high school student with an excessive combination of optimism, enthusiasm, and determination. I hope this project, an idea that hit me in bed at 11pm, helps you see how much good remains in the world. My objective is to restore hope in how lovely humanity can be and bring people together. <br> <br> Find me on: <br> <br> LinkedIn <br> <br> Instagram </p>
-            <button class="nav-btn" onclick="showA()">← Back to Archive</button>
-        </div>
-    </div>
+   <div id="teamP" class="page-view"> 
+  <div class="team-container"> 
+    <!-- Updated the src and alt attributes below -->
+    <img class="p-img" src="angie.JPG" alt="Angie Au - Founder and Creator"> 
+    <h2 style="color:var(--link);margin-bottom:4px;">Angie Au</h2> 
+    <div style="color:var(--btn);font-weight:600;font-size:0.9rem;text-transform:uppercase;margin-bottom:20px;">Founder and Creator</div> 
+    <p style="line-height:1.6;margin-bottom:25px;">Welcome to Our Memory Archive! I'm an high school student with an excessive combination of optimism, enthusiasm, and determination. I hope this project, an idea that hit me in bed at 11pm, helps you see how much good remains in the world. My objective is to restore hope in how lovely humanity can be amidst a mental health crisis. <br> <br> Support us on Instagram: Our.Memories.Archived </p> 
+    <button class="nav-btn" onclick="showA()">← Back to Archive</button> 
+  </div> 
+</div>
+
     
     <div class="overlay" id="readO" onclick="closeM()"><div class="modal" onclick="event.stopPropagation()"><span class="close" onclick="closeM()">✕</span><div style="color:var(--heart);font-size:1.5rem">♥</div><p id="readT" style="margin-top:10px;line-height:1.5;"></p></div></div>
     <div class="overlay" id="writeO" onclick="closeM()"><div class="modal" onclick="event.stopPropagation()"><span class="close" onclick="closeM()">✕</span><form onsubmit="subM(event)"><h2>Add to Archive</h2><textarea id="mInput" required></textarea><button type="submit" class="sub-btn">seal and send 💌</button></form></div></div>
 
     <script>
-        let saves = JSON.parse(localStorage.getItem('oma_saves')) || ["Rain sliding down the windowpane while warm under my blanket.","Heard my childhood favorite song randomly playing today.","Finally managed to keep my houseplant alive for a new leaf.","An old friend messaged out of nowhere to say hello.","The absolute silence in the woods after the first snowfall.","Successfully baking a loaf of sourdough perfectly from scratch.","Sitting by the harbor watching the sun melt into the horizon.","Finding a tiny smooth seashell tucked away in an old coat pocket.","The warm crunch of toasted bread on a cold morning.","Laughing so hard your stomach hurts with close friends.","Finding a crisp twenty dollar bill inside an old book.","The delicious aroma of chocolate chip cookies baking.","A cozy afternoon napping while a thunderstorms rages outside.","Getting all green lights on the drive home after a long work day.","A puppy walking up to lick your hand over the fence.","Finishing a fantastic book and just staring at the cover.","The soft crinkly crunch of walking over dry autumn leaves.","An unexpected warm smile from the grocery store cashier.","Seeing a bright beautiful rainbow arching right over your neighborhood.","Waking up and realizing you still have three hours left to sleep."];
-        const grid = document.getElementById('grid'); const limit = 20; let displayed = 0; const badWords = ["hate", "ugly", "stupid"];
+        let saves = JSON.parse(localStorage.getItem('oma_saves')) || ["I was in the mountains in Japan and awake during sunrise. It's such a sweet memory to me: I could see a reflective lake in the middle of the mountains and a sky so beautiful I can't describe it in words. I was sprinting and laughing and I just couldn't believe my eyes.","karaoke with my friends when I was six... we were elite!","I saw a rainbow.","At homecoming, I fell in love with my wife.","Seeing the northern lights in Finland was a blessing.","I used to bike around the neighborhood with my best friends and one day we decided to build a tree house. Guess what, it's still here.","sitting at the beach alone and happy watching the sun melt into the horizon","I went seashell hunting in Spain and I found so many treasures at the beach","I went to Oxford Summer Camp and fell in love with the school and made a ton of friends.","Laughed so hard my stomach hurt during a presentation at school."];
+        const grid = document.getElementById('grid'); const limit = 20; let displayed = 0; const badWords = ["hate", "ugly", "stupid", "fuck", "ew", "gross", "fck", "shit", "piss", "kill", "yourself", "kill yourself", "fucking hell", "hell", "disgusting", "idiot", "stupid", "dumbass", "bitch", "slut", "hoe", "stfu", "sybau", "shut up", "fuck off", "asshole", "ass", "cunt", "a-hole", "bop"];
         if (new URLSearchParams(window.location.search).get('admin') === 'true') { document.body.classList.add('admin-mode'); }
         function makeCard(txt, idx) {
             const el = document.createElement('div'); el.className = 'card'; el.style.setProperty('--r', (Math.random() * 6 - 3).toFixed(1) + 'deg');
